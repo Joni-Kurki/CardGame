@@ -41,7 +41,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 			if (this.transform.position.x < parentPlaceholder.GetChild (i).position.x) {
 
 				newSiblingIndex = i;
-				if (parentPlaceholder.transform.GetSiblingIndex () < newSiblingIndex)
+				if (cardPlaceholder.transform.GetSiblingIndex () < newSiblingIndex)
 					newSiblingIndex--;
 
 
