@@ -14,14 +14,12 @@ public class PlayerScript : MonoBehaviour {
 	public GameObject gameController;
 	public GameObject cardPrefab;
 	public GameObject playerHandArea;
-	int cardInstanceIndex;
 
 	// Use this for initialization
 	void Start () {
 		gcs = gameController.GetComponent<GameControllerScript> ();
 		playerHand = new List<Card> ();
 		playerHandPrefabs = new List<GameObject> ();
-		cardInstanceIndex = 0;
 		txtNames = new List<Text> ();
 		txtDescriptions = new List<Text> ();
 	}
@@ -37,11 +35,12 @@ public class PlayerScript : MonoBehaviour {
 
 	void DrawCards(){
 		playerHand.Add(gcs.GetRandomCardFromDatabase ());
-		GameObject go = new GameObject ();
-		go = Instantiate (cardPrefab, new Vector3 (0, 0, 0), Quaternion.identity, playerHandArea.transform);
+		Instantiate (cardPrefab, new Vector3 (0, 0, 0), Quaternion.identity, playerHandArea.transform);
 		SetCardTexts ();
+		SetCardArts ();
 		Debug.Log ("Player has " + playerHand.Count + " cards in hand");
 	}
+
 	void SetCardTexts(){ // haetaan kaikki CardText tagilla olevat, laitetaan joka toinen eri listoihin ja niiden perusteella haetaan korttilistasta nimet ja selitykset
 		GameObject[] goList = GameObject.FindGameObjectsWithTag ("CardText");
 		txtNames = new List<Text> ();
@@ -55,6 +54,15 @@ public class PlayerScript : MonoBehaviour {
 		for (int i = 0; i < playerHand.Count; i++) {
 			txtNames [i].text = playerHand [i].name;
 			txtDescriptions [i].text = playerHand [i].description;
+		}
+	}
+
+	void SetCardArts(){
+		GameObject[] goList = GameObject.FindGameObjectsWithTag ("CardArt");
+		for (int i = 0; i < playerHand.Count; i++) {
+			Image img = goList[i].GetComponent<Image>();
+			img.sprite = playerHand [i].arts;
+			//sRenderer.sprite = playerHand [i].arts;
 		}
 	}
 
