@@ -12,7 +12,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	public GameObject cardPlaceholder = null;
 
 	public void OnBeginDrag( PointerEventData eventData){
-		Debug.Log ("OnBeginDrag");
+		//Debug.Log ("OnBeginDrag");
 
 		cardPlaceholder = new GameObject ();
 		cardPlaceholder.transform.SetParent(this.transform.parent);
@@ -35,7 +35,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
 		this.transform.position = eventData.position;
 		int newSiblingIndex = parentPlaceholder.childCount;
-		if (cardPlaceholder.transform.parent = parentPlaceholder)
+		if (cardPlaceholder.transform.parent == parentPlaceholder)
 			cardPlaceholder.transform.parent.SetParent (parentPlaceholder);
 		for (int i=0; i < parentPlaceholder.childCount; i++) {
 			if (this.transform.position.x < parentPlaceholder.GetChild (i).position.x) {
@@ -52,7 +52,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	}
 
 	public void OnEndDrag(PointerEventData eventData){
-		Debug.Log ("OnEndDrag");
+		//Debug.Log ("OnEndDrag");
 		this.transform.SetParent(originalParent);
 		this.transform.SetSiblingIndex (cardPlaceholder.transform.GetSiblingIndex ());
 		this.GetComponent<CanvasGroup> ().blocksRaycasts = true;

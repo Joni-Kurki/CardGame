@@ -5,6 +5,7 @@ using UnityEngine;
 public class CardDatabase : MonoBehaviour {
 
 	public List<Card> cardList;
+
 	// Use this for initialization
 	void Awake () {
 		cardList = new List<Card> ();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameControllerScript : MonoBehaviour {
 
-	CardDatabase cdb;
+	public CardDatabase cdb;
 	public GameObject cardDatabase;
 	public GameObject playerHandArea;
 	// Use this for initialization
