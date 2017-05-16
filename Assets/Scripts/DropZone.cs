@@ -28,8 +28,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 		//Debug.Log (eventData.pointerDrag.name +" was dropped OnDrop to "+gameObject.name);
 
 		Draggable drag = eventData.pointerDrag.GetComponent<Draggable> ();
+		//Debug.Log(ps.playerHand.Count);
+		//Debug.Log (drag.transform.GetSiblingIndex ());
 		if (drag != null) {
 			drag.originalParent = this.transform;
+
 		}
 	}
 }

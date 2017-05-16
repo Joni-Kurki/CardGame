@@ -8,7 +8,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
 	public Transform originalParent = null;
 	public Transform parentPlaceholder = null;
-
 	public GameObject cardPlaceholder = null;
 
 	public void OnBeginDrag( PointerEventData eventData){
@@ -32,7 +31,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	}
 
 	public void OnDrag(PointerEventData eventData){
-
 		this.transform.position = eventData.position;
 		int newSiblingIndex = parentPlaceholder.childCount;
 		if (cardPlaceholder.transform.parent == parentPlaceholder)
@@ -43,8 +41,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 				newSiblingIndex = i;
 				if (cardPlaceholder.transform.GetSiblingIndex () < newSiblingIndex)
 					newSiblingIndex--;
-
-
 				break;
 			}
 		}

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour {
 
 	public List<Card> playerHand;
+	public List<Card> cardsInPlay;
 	public List<GameObject> playerHandPrefabs;
 	List<Text> txtNames;
 	List<Text> txtDescriptions;
@@ -19,6 +20,7 @@ public class PlayerScript : MonoBehaviour {
 	void Start () {
 		gcs = gameController.GetComponent<GameControllerScript> ();
 		playerHand = new List<Card> ();
+		cardsInPlay = new List<Card> ();
 		playerHandPrefabs = new List<GameObject> ();
 		txtNames = new List<Text> ();
 		txtDescriptions = new List<Text> ();
@@ -33,37 +35,23 @@ public class PlayerScript : MonoBehaviour {
 			GetCardInfo ();
 	}
 
-	void DrawCards(){
+	void DrawCards(){ // nostetaan kortti, instansioidaan se, sen kortin tiedoilla.
 		playerHand.Add(gcs.GetRandomCardFromDatabase ());
-		Instantiate (cardPrefab, new Vector3 (0, 0, 0), Quaternion.identity, playerHandArea.transform);
-		SetCardTexts ();
-		SetCardArts ();
+		GameObject go = Instantiate (cardPrefab, new Vector3 (0, 0, 0), Quaternion.identity, playerHandArea.transform);
+		//CardModelScript cms = go.GetComponent<CardModelScript> ();
+		//cms.name = playerHand [playerHand.Count - 1].name;
+		//cms.description = playerHand [playerHand.Count - 1].description;
+		SetCardModel (go, playerHand [playerHand.Count - 1].name, playerHand [playerHand.Count - 1].description, playerHand [playerHand.Count - 1].arts);
 		Debug.Log ("Player has " + playerHand.Count + " cards in hand");
 	}
 
-	void SetCardTexts(){ // haetaan kaikki CardText tagilla olevat, laitetaan joka toinen eri listoihin ja niiden perusteella haetaan korttilistasta nimet ja selitykset
-		GameObject[] goList = GameObject.FindGameObjectsWithTag ("CardText");
-		txtNames = new List<Text> ();
-		txtDescriptions = new List<Text> ();
-		for (int i = 0; i < goList.Length; i++) {
-			if (i % 2 == 0)
-				txtNames.Add (goList [i].GetComponent<Text> ());
-			if(i %2 == 1)
-				txtDescriptions.Add(goList [i].GetComponent<Text> ());
-		}
-		for (int i = 0; i < playerHand.Count; i++) {
-			txtNames [i].text = playerHand [i].name;
-			txtDescriptions [i].text = playerHand [i].description;
-		}
-	}
-
-	void SetCardArts(){
-		GameObject[] goList = GameObject.FindGameObjectsWithTag ("CardArt");
-		for (int i = 0; i < playerHand.Count; i++) {
-			Image img = goList[i].GetComponent<Image>();
-			img.sprite = playerHand [i].arts;
-			//sRenderer.sprite = playerHand [i].arts;
-		}
+	void SetCardModel(GameObject obj, string name, string desc, Sprite img){
+		Image image = obj.transform.GetChild (0).GetComponent<Image>();
+		image.sprite = img;
+		Text title = obj.transform.GetChild (1).GetComponent<Text>();
+		title.text = name;
+		Text description = obj.transform.GetChild (2).GetComponent<Text>();
+		description.text = desc;
 	}
 
 	void GetCardInfo(){
