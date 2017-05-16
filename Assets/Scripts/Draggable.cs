@@ -9,9 +9,12 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 	public Transform originalParent = null;
 	public Transform parentPlaceholder = null;
 	public GameObject cardPlaceholder = null;
+	Vector3 startDragPos;
 
 	public void OnBeginDrag( PointerEventData eventData){
 		//Debug.Log ("OnBeginDrag");
+
+		startDragPos = Input.mousePosition;
 
 		cardPlaceholder = new GameObject ();
 		cardPlaceholder.transform.SetParent(this.transform.parent);
@@ -45,6 +48,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 			}
 		}
 		cardPlaceholder.transform.SetSiblingIndex (newSiblingIndex);
+
 	}
 
 	public void OnEndDrag(PointerEventData eventData){

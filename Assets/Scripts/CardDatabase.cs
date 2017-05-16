@@ -11,7 +11,7 @@ public class CardDatabase : MonoBehaviour {
 	void Awake () {
 		cardList = new List<Card> ();
 		CreateDatabase ();
-		Debug.Log ("Init complete. Added "+cardList.Count+ " cards.");
+		Debug.Log ("Init complete. Added "+cardList.Count+ " cards to database.");
 	}
 
 	// tänne kaikki maholliset kortit sitten.

@@ -36,13 +36,14 @@ public class PlayerScript : MonoBehaviour {
 	}
 
 	void DrawCards(){ // nostetaan kortti, instansioidaan se, sen kortin tiedoilla.
-		playerHand.Add(gcs.GetRandomCardFromDatabase ());
+		Card c = gcs.GetRandomCardFromDatabase ();
+		playerHand.Add(c);
 		GameObject go = Instantiate (cardPrefab, new Vector3 (0, 0, 0), Quaternion.identity, playerHandArea.transform);
 		//CardModelScript cms = go.GetComponent<CardModelScript> ();
 		//cms.name = playerHand [playerHand.Count - 1].name;
 		//cms.description = playerHand [playerHand.Count - 1].description;
-		SetCardModel (go, playerHand [playerHand.Count - 1].name, playerHand [playerHand.Count - 1].description, playerHand [playerHand.Count - 1].arts, playerHand [playerHand.Count - 1].attack, playerHand [playerHand.Count - 1].def);
-		Debug.Log ("Player has " + playerHand.Count + " cards in hand");
+		SetCardModel (go, c.name, c.description, c.arts, c.attack, c.def);
+		//Debug.Log ("Player has " + playerHand.Count + " cards in hand");
 	}
 
 	void SetCardModel(GameObject obj, string name, string desc, Sprite img, int att, int def){

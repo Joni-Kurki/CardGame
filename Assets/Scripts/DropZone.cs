@@ -5,12 +5,12 @@ using UnityEngine.EventSystems;
 
 public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler {
 
-
 	public void OnPointerEnter(PointerEventData eventData){
 		if (eventData.pointerDrag == null)
 			return;
 
 		Draggable drag = eventData.pointerDrag.GetComponent<Draggable> ();
+
 		if (drag != null) {
 			drag.parentPlaceholder = this.transform;
 		}
@@ -25,14 +25,11 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 		}
 	}
 	public void OnDrop(PointerEventData eventData){
-		//Debug.Log (eventData.pointerDrag.name +" was dropped OnDrop to "+gameObject.name);
+		//Debug.Log (eventData.pointerDrag.name +" was dropped to "+gameObject.name);
 
 		Draggable drag = eventData.pointerDrag.GetComponent<Draggable> ();
-		//Debug.Log(ps.playerHand.Count);
-		//Debug.Log (drag.transform.GetSiblingIndex ());
 		if (drag != null) {
 			drag.originalParent = this.transform;
-
 		}
 	}
 }
