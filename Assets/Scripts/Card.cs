@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Card {
 
-	public enum Specials{ SMALL, BIG, HUGE, QUICK, HEAVYHITTER };
+	public enum CardType{ MONSTER,SPELL,BUILDING };
 
 	public int index;
 	public int color;
 	public string name;
 	public string description;
 	public Sprite arts;
-	public Specials spes;
+	public CardType cardtype;
 	public int attack, def;
 
 	public Card(int index, int color, string name, string description, Sprite sprite){
@@ -30,22 +30,22 @@ public class Card {
 		this.def = def;
 		this.arts = sprite;
 	}
-	public Card(int index, int color, string name, string description, Specials spes, Sprite sprite){
+	public Card(int index, int color, string name, string description, CardType cardtype, Sprite sprite){
 		this.name = name;
 		this.index = index;
 		this.name = name;
 		this.description = description;
-		this.spes = spes;
+		this.cardtype = cardtype;
 		this.arts = sprite;
 	}
-	public Card(int index, int color, string name, string description, int attack, int def, Specials spes, Sprite sprite){
+	public Card(int index, int color, string name, string description, int attack, int def, CardType cardtype, Sprite sprite){
 		this.name = name;
 		this.index = index;
 		this.name = name;
 		this.description = description;
 		this.attack = attack;
 		this.def = def;
-		this.spes = spes;
+		this.cardtype = cardtype;
 		this.arts = sprite;
 	}
 

@@ -41,15 +41,18 @@ public class PlayerScript : MonoBehaviour {
 		//CardModelScript cms = go.GetComponent<CardModelScript> ();
 		//cms.name = playerHand [playerHand.Count - 1].name;
 		//cms.description = playerHand [playerHand.Count - 1].description;
-		SetCardModel (go, playerHand [playerHand.Count - 1].name, playerHand [playerHand.Count - 1].description, playerHand [playerHand.Count - 1].arts);
+		SetCardModel (go, playerHand [playerHand.Count - 1].name, playerHand [playerHand.Count - 1].description, playerHand [playerHand.Count - 1].arts, playerHand [playerHand.Count - 1].attack, playerHand [playerHand.Count - 1].def);
 		Debug.Log ("Player has " + playerHand.Count + " cards in hand");
 	}
 
-	void SetCardModel(GameObject obj, string name, string desc, Sprite img){
+	void SetCardModel(GameObject obj, string name, string desc, Sprite img, int att, int def){
 		Image image = obj.transform.GetChild (0).GetComponent<Image>();
 		image.sprite = img;
 		Text title = obj.transform.GetChild (1).GetComponent<Text>();
-		title.text = name;
+		if (att != 0 && def != 0)
+			title.text = name + " [" + att + "/" + def + "]";
+		else
+			title.text = name;
 		Text description = obj.transform.GetChild (2).GetComponent<Text>();
 		description.text = desc;
 	}
